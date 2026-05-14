@@ -25,7 +25,7 @@ fp_syslogng_conf:
       - network("LOG_SERVER" port(514) transport("tcp"))
   filter:
     f_messages:
-      - level(info..emerg) and not facility(auth, authpriv, lpr, mail, news)
+      - level(info..emerg) and not facility(auth, authpriv, lpr, mail, news, daemon)
     f_daemon:
       - facility(daemon)
   log:
