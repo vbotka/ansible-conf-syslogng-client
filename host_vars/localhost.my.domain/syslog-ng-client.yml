@@ -1,9 +1,12 @@
+ai_log_server: 10.10.99.203
+_log_server: "{{ ansible_is_pull_mode | d(false) | ternary(ai_log_server, 'LOG_SERVER') }}"
+
 fp_syslogd: true
 fp_syslogd_enable: false
 fp_syslogd_conf_sanity: false
 
 fp_syslogng: true
-fp_syslogng_enable: false
+fp_syslogng_enable: true
 fp_syslogng_conf_template: syslog-ng.conf.j2
 fp_syslogng_conf:
   header:
@@ -22,7 +25,7 @@ fp_syslogng_conf:
       - file("/var/log/ansible.log" follow-freq(1) program-override("ansible"))
   destination:
     d_network:
-      - network("LOG_SERVER" port(514) transport("tcp"))
+      - network("{{ _log_server }}" port(514) transport("tcp"))
   filter:
     f_messages:
       - level(info..emerg) and not facility(auth, authpriv, lpr, mail, news, daemon)
