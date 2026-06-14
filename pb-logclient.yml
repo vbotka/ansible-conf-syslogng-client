@@ -8,6 +8,11 @@
     
   tasks:
 
+    - name: Install packages.
+      community.general.pkgng:
+        name:
+          - syslog-ng
+
     - name: Stop and disable syslogd
       ansible.builtin.import_role:
         name: vbotka.freebsd.postinstall
