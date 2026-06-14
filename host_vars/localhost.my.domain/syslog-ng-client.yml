@@ -1,5 +1,5 @@
-ai_log_server: 10.10.99.203
-_log_server: "{{ ansible_is_pull_mode | d(false) | ternary(ai_log_server, 'LOG_SERVER') }}"
+_ai_log_server: '10.10.99.203'
+_log_server: "{{ ansible_is_pull_mode | d(false) | ternary(_ai_log_server, 'LOG_SERVER') }}"
 
 fp_syslogd: true
 fp_syslogd_enable: false
